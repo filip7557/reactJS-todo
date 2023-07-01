@@ -30,20 +30,25 @@ function App() {
         break;
       default:
         setFilteredTodos(todos)
+        break;
     }
   }
 
   const saveLocalTodos = () => {
-    localStorage.setItem("todos", JSON.stringify(todos || []));
+    if(todos.length > 0) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
   };
 
   const getLocalTodos = () => {
-    if(localStorage.getItem("todos") !== null) {
-      localStorage.setItem("todos", JSON.stringify([]) || [])
-    } else {
-      let todoLocal = JSON.parse(localStorage.getItem("todos", JSON.stringify(todos))) || [];
-      setTodos(todoLocal);
+    if(todos.length === 0) {
+      if(localStorage.getItem("todos") === null) {
+        localStorage.setItem("todos", JSON.stringify([]));
+      } else {
+        let todoLocal = JSON.parse(localStorage.getItem("todos"))
+        setTodos(todoLocal);
     }
+  }
   };
 
   return (
