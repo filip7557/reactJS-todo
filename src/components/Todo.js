@@ -4,6 +4,7 @@ const Todo = ({ text, todos, todo, setTodos }) => {
     //Events
     const deleteHandler = () => {
         setTodos(todos.filter((el) => el.id !== todo.id));
+        localStorage.setItem("todos", JSON.stringify(todos));
     };
     const completeHandler = () => {
         setTodos(todos.map((item) => {
